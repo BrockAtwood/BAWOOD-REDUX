@@ -5,14 +5,16 @@ import { QUERY_CHECKOUT } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
-import { useStoreContext } from "../../utils/GlobalState";
+//file was deleted and not needed
+// import { useStoreContext } from "../../utils/GlobalState";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import "./style.css";
 
 //import from react-redux library
 //useDispatch is a function used to assign to a variable, dispatching to the store by adding an action
 //useSelector is a similar function that takes current states and returns whatever we want from it
-//will be imported on all components that need to read data from the state and/or dispatch an action to it
+//will be imported on all components that need to read data from the state and/or dispatch an action to it.
+
 import { useDispatch, useSelector } from "react-redux";
 
 //Unit #22: State, Activity: #24

@@ -4,8 +4,8 @@ import { useQuery } from "@apollo/client";
 
 import Cart from "../components/Cart";
 
-//comment out the below useStoreContext
-// import { useStoreContext } from '../utils/GlobalState';
+//file was deleted and not needed
+// import { useStoreContext } from "../../utils/GlobalState";
 
 import {
   REMOVE_FROM_CART,
