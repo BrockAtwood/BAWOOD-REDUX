@@ -9,13 +9,25 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import "./style.css";
 
+//import from react-redux library
+//useDispatch is a function used to assign to a variable, dispatching to the store by adding an action
+//useSelector is a similar function that takes current states and returns whatever we want from it
+//will be imported on all components that need to read data from the state and/or dispatch an action to it
+import { useDispatch, useSelector } from "react-redux";
+
 //Unit #22: State, Activity: #24
 // stripePromise returns a promise with the stripe object as soon as the Stripe package loads
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 const Cart = () => {
-  const [state, dispatch] = useStoreContext();
+  //comment out and replace with new code from react-redux library
+  // const [state, dispatch] = useStoreContext();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+
+  //calling new const by adding actions to the argument
+  //will be used on all components that need to read data from the state and/or dispatch an action to it
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
   //Unit #22: State, Activity: #24
   // We check to see if there is a data object that exists, if so this means that a checkout session was returned from the backend
