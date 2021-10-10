@@ -35,7 +35,7 @@ THEN I find that the app uses Redux instead of the Context API
 
 ## Delopyment links:
 
-- URL to Deployed Application:
+- URL to Deployed Application: https://secure-thicket-41557.herokuapp.com/
 
 - URL to the GitHub Repository: https://github.com/BrockAtwood/BAWOOD-REDUX
 
