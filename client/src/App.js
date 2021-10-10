@@ -51,7 +51,8 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <StoreProvider>
+          {/* forgot to change storeprovider to provider with store */}
+          <Provider store={store}>
             <Nav />
             <Switch>
               <Route exact path="/" component={Home} />
@@ -62,7 +63,8 @@ function App() {
               <Route exact path="/products/:id" component={Detail} />
               <Route component={NoMatch} />
             </Switch>
-          </StoreProvider>
+            {/* forgot to change storeprovider to provider with store */}
+          </Provider>
         </div>
       </Router>
     </ApolloProvider>
