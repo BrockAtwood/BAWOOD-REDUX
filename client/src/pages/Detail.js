@@ -1,21 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 
-import Cart from '../components/Cart';
-import { useStoreContext } from '../utils/GlobalState';
+import Cart from "../components/Cart";
+
+//comment out the below useStoreContext
+// import { useStoreContext } from '../utils/GlobalState';
+
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
   UPDATE_PRODUCTS,
-} from '../utils/actions';
-import { QUERY_PRODUCTS } from '../utils/queries';
-import { idbPromise } from '../utils/helpers';
-import spinner from '../assets/spinner.gif';
+} from "../utils/actions";
+import { QUERY_PRODUCTS } from "../utils/queries";
+import { idbPromise } from "../utils/helpers";
+import spinner from "../assets/spinner.gif";
+
+//import from react-redux library
+//useDispatch is a function used to assign to a variable, dispatching to the store by adding an action
+//useSelector is a similar function that takes current states and returns whatever we want from it
+//will be imported on all components that need to read data from the state and/or dispatch an action to it
+import { useDispatch, useSelector } from "react-redux";
 
 function Detail() {
-  const [state, dispatch] = useStoreContext();
+  //comment out and replace with new code from react-redux library
+  // const [state, dispatch] = useStoreContext();
+
+  //calling new const by adding actions to the argument
+  //will be used on all components that need to read data from the state and/or dispatch an action to it
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
@@ -37,12 +53,12 @@ function Detail() {
       });
 
       data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
+        idbPromise("products", "put", product);
       });
     }
     // get cache from idb
     else if (!loading) {
-      idbPromise('products', 'get').then((indexedProducts) => {
+      idbPromise("products", "get").then((indexedProducts) => {
         dispatch({
           type: UPDATE_PRODUCTS,
           products: indexedProducts,
@@ -59,7 +75,7 @@ function Detail() {
         _id: id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
       });
-      idbPromise('cart', 'put', {
+      idbPromise("cart", "put", {
         ...itemInCart,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
       });
@@ -68,7 +84,7 @@ function Detail() {
         type: ADD_TO_CART,
         product: { ...currentProduct, purchaseQuantity: 1 },
       });
-      idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+      idbPromise("cart", "put", { ...currentProduct, purchaseQuantity: 1 });
     }
   };
 
@@ -78,7 +94,7 @@ function Detail() {
       _id: currentProduct._id,
     });
 
-    idbPromise('cart', 'delete', { ...currentProduct });
+    idbPromise("cart", "delete", { ...currentProduct });
   };
 
   return (
@@ -92,7 +108,7 @@ function Detail() {
           <p>{currentProduct.description}</p>
 
           <p>
-            <strong>Price:</strong>${currentProduct.price}{' '}
+            <strong>Price:</strong>${currentProduct.price}{" "}
             <button onClick={addToCart}>Add to Cart</button>
             <button
               disabled={!cart.find((p) => p._id === currentProduct._id)}
